@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SPK Bantuan Sosial - Metode WASPAS</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #0ea5e9;
+      --border: #e5e7eb;
+      --accent: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 32px; background: var(--bg); color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--border);
+    }
+    header h1 {
+      margin: 0 0 8px; font-size: 24px; font-weight: 700; color: var(--text);
+    }
+    header p { margin: 0; color: var(--muted); }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 28px; overflow: hidden;
+    }
+    .card-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    .card-header h2 {
+      margin: 0; font-size: 18px; font-weight: 700; color: var(--text);
+    }
+    .card-header .meta {
+      margin-left: auto; font-size: 13px; color: var(--muted);
+    }
+    .table-wrap { padding: 16px 20px 20px; }
+    table {
+      width: 100%; border-collapse: collapse; background: #fff; font-size: 14px;
+    }
+    thead th {
+      background: #f3f4f6; color: #111827; font-weight: 700; text-align: left;
+      padding: 12px; border-bottom: 1px solid var(--border);
+    }
+    tbody td {
+      padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top;
+    }
+    tbody tr:hover { background: #fafafa; }
+    .badge {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px;
+      border: 1px solid var(--border); color: #111827; background: #f9fafb;
+    }
+    .badge.cost { color: #b91c1c; border-color: #fecaca; background: #fff5f5; }
+    .badge.benefit { color: #065f46; border-color: #a7f3d0; background: #f0fdf4; }
+    .note {
+      padding: 12px 16px; background: #fff7ed; border: 1px solid #fed7aa; color: #7c2d12;
+      border-radius: 10px; font-size: 13px; margin: 12px 20px 20px;
+    }
+    .footer {
+      text-align: center; color: var(--muted); font-size: 12px; margin-top: 8px;
+    }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px;
+      background: #eef2ff; color: #3730a3; border: 1px solid #c7d2fe;
+    }
+    .w-80 { width: 80px; }
+    .w-120 { width: 120px; }
+    .w-160 { width: 160px; }
+    .w-200 { width: 200px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Perancangan & Implementasi SPK Penyaluran Bantuan Sosial (WASPAS)</h1>
+      <p>Kantor Wali Nagari Ampang Gadang — Sistem berbasis web untuk penilaian objektif penerima bantuan.</p>
+    </header>
+
+    <!-- Tabel 4.1: Kriteria -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Tabel 4.1 — Kriteria</h2>
+        <span class="meta">Kolom: No, Kriteria, Jenis, Bobot (%)</span>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="Tabel Kriteria">
+          <thead>
+            <tr>
+              <th class="w-80">No</th>
+              <th class="w-200">Kriteria</th>
+              <th class="w-120">Jenis</th>
+              <th class="w-80">Bobot (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Luas lantai per kapita</td><td><span class="badge cost">Cost</span></td><td>8</td></tr>
+            <tr><td>2</td><td>Jenis lantai</td><td><span class="badge cost">Cost</span></td><td>6</td></tr>
+            <tr><td>3</td><td>Jenis dinding</td><td><span class="badge cost">Cost</span></td><td>6</td></tr>
+            <tr><td>4</td><td>Akses fasilitas buang air</td><td><span class="badge cost">Cost</span></td><td>7</td></tr>
+            <tr><td>5</td><td>Sumber penerangan</td><td><span class="badge cost">Cost</span></td><td>6</td></tr>
+            <tr><td>6</td><td>Sumber air minum</td><td><span class="badge cost">Cost</span></td><td>6</td></tr>
+            <tr><td>7</td><td>Bahan bakar memasak</td><td><span class="badge cost">Cost</span></td><td>5</td></tr>
+            <tr><td>8</td><td>Konsumsi protein mingguan</td><td><span class="badge benefit">Benefit</span></td><td>6</td></tr>
+            <tr><td>9</td><td>Kepemilikan pakaian tahunan</td><td><span class="badge benefit">Benefit</span></td><td>4</td></tr>
+            <tr><td>10</td><td>Frekuensi makan harian</td><td><span class="badge benefit">Benefit</span></td><td>7</td></tr>
+            <tr><td>11</td><td>Kemampuan berobat</td><td><span class="badge benefit">Benefit</span></td><td>7</td></tr>
+            <tr><td>12</td><td>Sumber penghasilan & besaran</td><td><span class="badge cost">Cost</span></td><td>12</td></tr>
+            <tr><td>13</td><td>Pendidikan kepala keluarga</td><td><span class="badge cost">Cost</span></td><td>10</td></tr>
+            <tr><td>14</td><td>Aset/tabungan likuid</td><td><span class="badge benefit">Benefit</span></td><td>10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Catatan:</strong> Bobot dapat disesuaikan melalui FGD/ekspert judgement. Total bobot = 100%.
+      </div>
+    </section>
+
+    <!-- Tabel 4.2: Sub Kriteria -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Tabel 4.2 — Sub Kriteria</h2>
+        <span class="meta">Kolom: Kriteria, Sub Kriteria, Nilai</span>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="Tabel Sub Kriteria">
+          <thead>
+            <tr>
+              <th class="w-200">Kriteria</th>
+              <th class="w-200">Sub Kriteria</th>
+              <th class="w-80">Nilai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Luas lantai per kapita -->
+            <tr><td>Luas lantai per kapita</td><td>&lt; 8 m²/orang</td><td>1</td></tr>
+            <tr><td>Luas lantai per kapita</td><td>8–12 m²/orang</td><td>2</td></tr>
+            <tr><td>Luas lantai per kapita</td><td>&gt; 12 m²/orang</td><td>3</td></tr>
+
+            <!-- Jenis lantai -->
+            <tr><td>Jenis lantai</td><td>Tanah/bambu/kayu murah</td><td>1</td></tr>
+            <tr><td>Jenis lantai</td><td>Semen/ubin sederhana</td><td>2</td></tr>
+            <tr><td>Jenis lantai</td><td>Keramik/parket</td><td>3</td></tr>
+
+            <!-- Jenis dinding -->
+            <tr><td>Jenis dinding</td><td>Bambu/rumbia/kayu murah</td><td>1</td></tr>
+            <tr><td>Jenis dinding</td><td>Tembok tanpa plester</td><td>2</td></tr>
+            <tr><td>Jenis dinding</td><td>Tembok diplester/finishing</td><td>3</td></tr>
+
+            <!-- Fasilitas buang air -->
+            <tr><td>Akses fasilitas buang air</td><td>Tanpa fasilitas/bersama</td><td>1</td></tr>
+            <tr><td>Akses fasilitas buang air</td><td>Jamban sederhana</td><td>2</td></tr>
+            <tr><td>Akses fasilitas buang air</td><td>Jamban sehat pribadi</td><td>3</td></tr>
+
+            <!-- Penerangan -->
+            <tr><td>Sumber penerangan</td><td>Tanpa listrik</td><td>1</td></tr>
+            <tr><td>Sumber penerangan</td><td>Listrik subsidi</td><td>2</td></tr>
+            <tr><td>Sumber penerangan</td><td>Listrik non-subsidi</td><td>3</td></tr>
+
+            <!-- Air minum -->
+            <tr><td>Sumber air minum</td><td>Sumur tak terlindung/sungai/air hujan</td><td>1</td></tr>
+            <tr><td>Sumber air minum</td><td>Sumur terlindung</td><td>2</td></tr>
+            <tr><td>Sumber air minum</td><td>PDAM/air layak</td><td>3</td></tr>
+
+            <!-- Bahan bakar -->
+            <tr><td>Bahan bakar memasak</td><td>Kayu/arang/minyak tanah</td><td>1</td></tr>
+            <tr><td>Bahan bakar memasak</td><td>LPG subsidi</td><td>2</td></tr>
+            <tr><td>Bahan bakar memasak</td><td>LPG non-subsidi/kompor listrik</td><td>3</td></tr>
+
+            <!-- Konsumsi protein -->
+            <tr><td>Konsumsi protein mingguan</td><td>≤ 1 kali/minggu</td><td>1</td></tr>
+            <tr><td>Konsumsi protein mingguan</td><td>2–3 kali/minggu</td><td>2</td></tr>
+            <tr><td>Konsumsi protein mingguan</td><td>≥ 4 kali/minggu</td><td>3</td></tr>
+
+            <!-- Pakaian -->
+            <tr><td>Kepemilikan pakaian tahunan</td><td>1 stel/tahun</td><td>1</td></tr>
+            <tr><td>Kepemilikan pakaian tahunan</td><td>2 stel/tahun</td><td>2</td></tr>
+            <tr><td>Kepemilikan pakaian tahunan</td><td>≥ 3 stel/tahun</td><td>3</td></tr>
+
+            <!-- Makan harian -->
+            <tr><td>Frekuensi makan harian</td><td>1–2 kali/hari</td><td>1</td></tr>
+            <tr><td>Frekuensi makan harian</td><td>2–3 kali/hari</td><td>2</td></tr>
+            <tr><td>Frekuensi makan harian</td><td>≥ 3 kali/hari</td><td>3</td></tr>
+
+            <!-- Berobat -->
+            <tr><td>Kemampuan berobat</td><td>Tidak sanggup ke puskesmas</td><td>1</td></tr>
+            <tr><td>Kemampuan berobat</td><td>Sanggup layanan dasar</td><td>2</td></tr>
+            <tr><td>Kemampuan berobat</td><td>Sanggup layanan komprehensif</td><td>3</td></tr>
+
+            <!-- Penghasilan -->
+            <tr><td>Sumber penghasilan & besaran</td><td>Upah ≤ Rp600.000/bulan</td><td>1</td></tr>
+            <tr><td>Sumber penghasilan & besaran</td><td>Rp600.001–Rp1.500.000</td><td>2</td></tr>
+            <tr><td>Sumber penghasilan & besaran</td><td>≥ Rp1.500.001</td><td>3</td></tr>
+
+            <!-- Pendidikan KK -->
+            <tr><td>Pendidikan kepala keluarga</td><td>Tidak sekolah/tidak tamat SD</td><td>1</td></tr>
+            <tr><td>Pendidikan kepala keluarga</td><td>Tamat SD/SMP</td><td>2</td></tr>
+            <tr><td>Pendidikan kepala keluarga</td><td>SMA/lebih tinggi</td><td>3</td></tr>
+
+            <!-- Aset/tabungan -->
+            <tr><td>Aset/tabungan likuid</td><td>Tidak memiliki ≥ Rp500.000</td><td>1</td></tr>
+            <tr><td>Aset/tabungan likuid</td><td>Rp500.000–Rp2.000.000</td><td>2</td></tr>
+            <tr><td>Aset/tabungan likuid</td><td>≥ Rp2.000.001</td><td>3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Catatan:</strong> Nilai sub kriteria berskala 1–3 untuk kemudahan normalisasi WASPAS. Dapat diubah ke skala lain bila diperlukan.
+      </div>
+    </section>
+
+    <!-- Tabel 4.3: Kriteria, kategori, dan nilai bobot -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Tabel 4.3 — Kriteria, Kategori, dan Nilai Bobot Penilaian</h2>
+        <span class="meta">Ringkasan pemetaan kategori ke nilai dan bobot</span>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="Tabel Kategori dan Bobot">
+          <thead>
+            <tr>
+              <th class="w-200">Kriteria</th>
+              <th class="w-160">Kategori</th>
+              <th class="w-80">Nilai</th>
+              <th class="w-80">Bobot (%)</th>
+              <th class="w-120">Jenis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Luas lantai per kapita</td><td>&lt; 8 m²</td><td>1</td><td>8</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Luas lantai per kapita</td><td>8–12 m²</td><td>2</td><td>8</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Luas lantai per kapita</td><td>&gt; 12 m²</td><td>3</td><td>8</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Jenis lantai</td><td>Tanah/bambu/kayu murah</td><td>1</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Jenis lantai</td><td>Semen/ubin</td><td>2</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Jenis lantai</td><td>Keramik/parket</td><td>3</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Jenis dinding</td><td>Bambu/rumbia/kayu murah</td><td>1</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Jenis dinding</td><td>Tembok tanpa plester</td><td>2</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Jenis dinding</td><td>Tembok diplester</td><td>3</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Akses fasilitas buang air</td><td>Tanpa/bersama</td><td>1</td><td>7</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Akses fasilitas buang air</td><td>Jamban sederhana</td><td>2</td><td>7</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Akses fasilitas buang air</td><td>Jamban sehat</td><td>3</td><td>7</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Sumber penerangan</td><td>Tanpa listrik</td><td>1</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber penerangan</td><td>Listrik subsidi</td><td>2</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber penerangan</td><td>Listrik non-subsidi</td><td>3</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Sumber air minum</td><td>Tidak terlindung</td><td>1</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber air minum</td><td>Terlindung</td><td>2</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber air minum</td><td>Layak/PDAM</td><td>3</td><td>6</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Bahan bakar memasak</td><td>Kayu/arang/minyak tanah</td><td>1</td><td>5</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Bahan bakar memasak</td><td>LPG subsidi</td><td>2</td><td>5</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Bahan bakar memasak</td><td>LPG non-subsidi/kompor listrik</td><td>3</td><td>5</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Konsumsi protein mingguan</td><td>≤ 1 kali</td><td>1</td><td>6</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Konsumsi protein mingguan</td><td>2–3 kali</td><td>2</td><td>6</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Konsumsi protein mingguan</td><td>≥ 4 kali</td><td>3</td><td>6</td><td><span class="badge benefit">Benefit</span></td></tr>
+
+            <tr><td>Kepemilikan pakaian tahunan</td><td>1 stel</td><td>1</td><td>4</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Kepemilikan pakaian tahunan</td><td>2 stel</td><td>2</td><td>4</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Kepemilikan pakaian tahunan</td><td>≥ 3 stel</td><td>3</td><td>4</td><td><span class="badge benefit">Benefit</span></td></tr>
+
+            <tr><td>Frekuensi makan harian</td><td>1–2 kali</td><td>1</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Frekuensi makan harian</td><td>2–3 kali</td><td>2</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Frekuensi makan harian</td><td>≥ 3 kali</td><td>3</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+
+            <tr><td>Kemampuan berobat</td><td>Tidak sanggup</td><td>1</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Kemampuan berobat</td><td>Layanan dasar</td><td>2</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Kemampuan berobat</td><td>Komprehensif</td><td>3</td><td>7</td><td><span class="badge benefit">Benefit</span></td></tr>
+
+            <tr><td>Sumber penghasilan & besaran</td><td>≤ Rp600.000</td><td>1</td><td>12</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber penghasilan & besaran</td><td>Rp600.001–Rp1.500.000</td><td>2</td><td>12</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Sumber penghasilan & besaran</td><td>≥ Rp1.500.001</td><td>3</td><td>12</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Pendidikan kepala keluarga</td><td>Tidak sekolah/tidak tamat SD</td><td>1</td><td>10</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Pendidikan kepala keluarga</td><td>Tamat SD/SMP</td><td>2</td><td>10</td><td><span class="badge cost">Cost</span></td></tr>
+            <tr><td>Pendidikan kepala keluarga</td><td>SMA/lebih tinggi</td><td>3</td><td>10</td><td><span class="badge cost">Cost</span></td></tr>
+
+            <tr><td>Aset/tabungan likuid</td><td>&lt; Rp500.000</td><td>1</td><td>10</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Aset/tabungan likuid</td><td>Rp500.000–Rp2.000.000</td><td>2</td><td>10</td><td><span class="badge benefit">Benefit</span></td></tr>
+            <tr><td>Aset/tabungan likuid</td><td>&gt; Rp2.000.000</td><td>3</td><td>10</td><td><span class="badge benefit">Benefit</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Catatan:</strong> Kolom “Nilai” adalah skor kategori (1–3). Kolom “Bobot (%)” mengikuti Tabel 4.1 untuk konsistensi perhitungan WASPAS.
+      </div>
+    </section>
+
+    <!-- Tabel 4.4: Hasil nilai konversi -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Tabel 4.4 — Hasil Nilai Konversi</h2>
+        <span class="meta">Normalisasi WASPAS (Q1 & Q2) dan skor akhir</span>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="Tabel Hasil Nilai Konversi">
+          <thead>
+            <tr>
+              <th class="w-120">Alternatif</th>
+              <th class="w-80">C1</th>
+              <th class="w-80">C2</th>
+              <th class="w-80">C3</th>
+              <th class="w-80">C4</th>
+              <th class="w-80">C5</th>
+              <th class="w-80">C6</th>
+              <th class="w-80">C7</th>
+              <th class="w-80">C8</th>
+              <th class="w-80">C9</th>
+              <th class="w-80">C10</th>
+              <th class="w-80">C11</th>
+              <th class="w-80">C12</th>
+              <th class="w-80">C13</th>
+              <th class="w-80">C14</th>
+              <th class="w-120">Q1 (Σ w·x')</th>
+              <th class="w-120">Q2 (Π x'^w)</th>
+              <th class="w-120">Skor Akhir</th>
+              <th class="w-80">Peringkat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Contoh baris; ganti dengan hasil perhitungan normalisasi -->
+            <tr>
+              <td class="pill">A1 — Keluarga 001</td>
+              <td>0.33</td><td>0.50</td><td>0.33</td><td>0.33</td><td>0.50</td><td>0.33</td><td>0.33</td>
+              <td>0.33</td><td>0.33</td><td>0.33</td><td>0.33</td><td>0.33</td><td>0.33</td><td>0.33</td>
+              <td>0.58</td><td>0.42</td><td>0.50</td><td>2</td>
+            </tr>
+            <tr>
+              <td class="pill">A2 — Keluarga 002</td>
+              <td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td>
+              <td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td><td>0.67</td>
+              <td>0.82</td><td>0.78</td><td>0.80</td><td>1</td>
+            </tr>
+            <tr>
+              <td class="pill">A3 — Keluarga 003</td>
+              <td>0.50</td><td>0.33</td><td>0.50</td><td>0.50</td><td>0.33</td><td>0.50</td><td>0.50</td>
+              <td>0.50</td><td>0.50</td><td>0.50</td><td>0.50</td><td>0.50</td><td>0.50</td><td>0.50</td>
+              <td>0.70</td><td>0.60</td><td>0.65</td><td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Catatan perhitungan WASPAS:</strong> Normalisasi benefit: \(x'_{ij} = x_{ij} / \max(x_j)\). Normalisasi cost: \(x'_{ij} = \min(x_j) / x_{ij}\).
+        Skor agregat: \(Q = \lambda \cdot \sum (w_j \cdot x'_{ij}) + (1-\lambda) \cdot \prod (x'_{ij})^{w_j}\), dengan \(\lambda = 0{,}5\) sebagai default.
+      </div>
+    </section>
+
+    <div class="footer">
+      Template siap disesuaikan dengan data lapangan dan integrasi ke modul perhitungan otomatis.
+    </div>
+  </div>
+</body>
+</html>
